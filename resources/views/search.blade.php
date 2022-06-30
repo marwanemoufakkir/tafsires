@@ -247,7 +247,8 @@
                                                                                 <label class="fs-2 form-label fw-bolder text-dark">نوع Type :</label>
                                                                                 <select name="paraghraphe.type" class="form-select form-select-solid" data-kt-repeater="select2" data-placeholder="نوع Type" >
 																					<option value=""></option>
-                                                                                </select>
+           <option value="hadith">Hadith</option>
+                                                                                    <option value="nothadith">Nothadith</option>                                                                              </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row mb-5">

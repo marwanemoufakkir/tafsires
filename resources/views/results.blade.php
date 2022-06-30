@@ -153,20 +153,20 @@
                                                 
                                             </div>
                                             <!--begin::Input group-->
-                                            {{-- <div class="mb-5">
+                                            <div class="mb-5">
                                                 <label class="fs-6 form-label fw-bolder text-dark">موضوع فرعي Subtopic</label>
                                                 <div class="scroll h-200px pt-2">
-                                                    @foreach (\App\Models\Surah::get() as $surah)
+                                                    @foreach (\App\Models\Subtopic::get() as $subtopic)
                                                 <!--begin::Checkbox-->
                                                 <div class="form-check form-check-custom form-check-solid mb-5">
-                                                    <input class="form-check-input" type="checkbox" value="{{ $surah->id}}"  name="filter[subtopic][]" />
-                                                    <label class="form-check-label flex-grow-1 fw-bold text-gray-700 fs-6" for="type">{!! str_replace('سورة', ' ', $surah->arabic) !!} - {{ $surah->latin }}</label>
-                                                </div>
+                                                    <input class="form-check-input" type="checkbox" value="{{ $subtopic->name}}"  name="filter[subtopic][]" />
+                                                    <label class="form-check-label flex-grow-1 fw-bold text-gray-700 fs-6" for="type"> {{ $subtopic->name }}</label>
+                                              </div>
                                                 <!--end::Checkbox-->
                                                 @endforeach
                                                 </div>
                                                 
-                                            </div> --}}
+                                            </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
                                             <div class="mb-10">
@@ -288,7 +288,17 @@
 										<div class="d-flex flex-stack flex-wrap">
 											<!--begin::Author-->
 											<div class="d-flex align-items-center py-1">
-	
+																		<!--begin::Symbol-->
+												<div class="symbol symbol-35px me-2">
+													<div class="symbol-label bg-light-success fs-3 fw-bold text-success text-uppercase">{{$item['_source']['ayah']['chapterNumber']}}</div>
+												</div>
+												<!--end::Symbol-->
+												<!--begin::Name-->
+												<div class="d-flex flex-column align-items-start justify-content-center">
+													<span class="text-gray-900 fs-7 fw-bold lh-1 mb-2">آية</span>
+											<span class="text-muted fs-8 fw-bold lh-1">{{$item['_source']['ayah']['ayahNumber']}}</span>	
+												</div>
+												<!--end::Name-->
 											</div>
 											<!--end::Author-->
 											<!--begin::Info-->

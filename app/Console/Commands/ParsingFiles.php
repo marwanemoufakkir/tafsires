@@ -48,7 +48,7 @@ class ParsingFiles extends Command
     public function handle()
     {
         $params = ['index' => 'my-tafsir'];
-        // $response = $this->elasticsearch->indices()->delete($params);
+          $response = $this->elasticsearch->indices()->delete($params);
         $params = [
             'index' => 'my-tafsir',
             'body' => [
@@ -122,7 +122,7 @@ class ParsingFiles extends Command
         "type"=>"object",
         "properties"=>[
           "chapterNumber"=>[
-            "type"=>"long"
+            "type"=>"keyword"
           ],
           "ayahNumber"=>[
             "type"=>"keyword"
@@ -143,10 +143,6 @@ class ParsingFiles extends Command
           "text"=>[
             "type"=>"text",
               "fields"=>[
-                "keyword"=>[
-                  "type"=>"keyword",
-                  "ignore_above"=> 100000
-                ],
                 "rebuilt_arabic"=>[
                   "type"=>"text",
                   "analyzer"=>"rebuilt_arabic"
@@ -188,16 +184,16 @@ class ParsingFiles extends Command
 
 
         // Create the index with mappings and settings now
-        // $response = $this->elasticsearch->indices()->create($params);
+        $response = $this->elasticsearch->indices()->create($params);
         $this->info('Indexing all sections. This might take a while...');
         
         foreach ($this->getText() as $key => $value) {
-            // $this->elasticsearch->index([
-            //     'index' => 'my-tafsir',
-            //     'type' => '_doc',
-            //     'id'=>$key,
-            //     'body'=> $value
-            // ]);
+            $this->elasticsearch->index([
+           	   'index' => 'my-tafsir',
+                   'type' => '_doc',
+                   'id'=>$key,
+                   'body'=> $value
+             ]);
 
             // PHPUnit-style feedback
             $this->output->write('.');
@@ -208,7 +204,7 @@ class ParsingFiles extends Command
     }
     protected function getText(){
         $doc = new \DOMDocument;
-        $files = glob("xml/*xml");
+        $files = glob("Tabari_komplett_komplett.xml");
         $sections = array();
         $listTopicsDB=array();
         if (is_array($files)) {   
